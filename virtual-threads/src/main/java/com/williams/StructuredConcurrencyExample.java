@@ -1,6 +1,7 @@
 package com.williams;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.StructuredTaskScope.Subtask;
@@ -86,7 +87,7 @@ public class StructuredConcurrencyExample {
             Subtask<String> task2 = scope.fork(() -> quickTask());
 
             // Wait with timeout
-            scope.joinUntil(java.time.Instant.now().plus(Duration.ofSeconds(3)));
+            scope.joinUntil(Instant.now().plus(Duration.ofSeconds(3)));
             scope.throwIfFailed();
 
             System.out.println("Task 1: " + task1.get());
